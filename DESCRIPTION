@@ -1,13 +1,16 @@
 Package: morecats
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Provides Additional Functions for Working with Factors
+Version: 0.1
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Alex", "Homer", , "me@alexjhomer.co.uk", role = c("aut", "cre"))
+Description: This package exists because there are various things I want to do
+    with the forcats package that either there isn't a function for, or that
+    take a specific combination of functions that I find myself using over
+    and over again.  It therefore extends forcats to provide this functionality.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
+Imports:
+	forcats (>= 0.5)

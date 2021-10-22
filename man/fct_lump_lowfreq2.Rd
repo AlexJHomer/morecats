@@ -19,7 +19,11 @@ A reordered factor
 This function is a variant of \code{fct_lump_infreq} from forcats, but instead of
 lumping together levels such that the "Other" category is smaller than all
 others, it lumps together levels such that the "Other" category is smaller
-than the most frequent level
+than the most frequent level.
+}
+\details{
+As you might imagine, this function borrows heavily from the source code from
+forcats for \code{fct_lump_infreq}, and is used with the appropriate permission.
 }
 \examples{
 x <- factor(rep(LETTERS[1:9], times = c(40, 10, 5, 27, 1, 1, 1, 1, 1)))

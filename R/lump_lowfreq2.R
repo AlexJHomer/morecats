@@ -3,7 +3,10 @@
 #' This function is a variant of `fct_lump_infreq` from forcats, but instead of
 #' lumping together levels such that the "Other" category is smaller than all
 #' others, it lumps together levels such that the "Other" category is smaller
-#' than the most frequent level
+#' than the most frequent level.
+#'
+#' As you might imagine, this function borrows heavily from the source code from
+#' forcats for `fct_lump_infreq`, and is used with the appropriate permission.
 #'
 #' @param f A factor
 #' @param other_level The name to use for the "Other" level.  Defaults to

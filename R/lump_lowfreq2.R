@@ -11,9 +11,9 @@
 #' @param f A factor
 #' @param other_level The name to use for the "Other" level.  Defaults to
 #'   `"Other"`.
-#' @param k The function compares to the `k`th-largest element (rounds up for
+#' @param k,prop The function compares to the `k`th-largest element (rounds up for
 #'   non-integer positive numbers), and ensures the "Other" level is no larger
-#'   than the `k`th-most numerous.  Defaults to `1`.
+#'   than `prop` times the `k`th-most numerous.  Defaults to `1`.
 #' @return A reordered factor
 #' @export
 #' @examples
@@ -22,16 +22,19 @@
 #' x %>% table()
 #' x %>% fct_lump_lowfreq2() %>% table()
 #' x %>% fct_lump_lowfreq2(k = 3, other = "Others") %>% table()
+#' x %>% fct_lump_lowfreq2(prop = 1.5) %>% table()
 #' # (Examples modified from forcats)
 fct_lump_lowfreq2 <- function (
   f,
   other_level = "Other",
-  k = 1
+  k = 1,
+  prop = 1
 ) {
-  k <- check_natural(k)
+  k <- ceiling(check_positive(k))
+  prop <- check_positive(prop)
   calcs <- check_calc_levels(f)
   f <- calcs$f
-  new_levels <- ifelse(!in_smallest2(calcs$count, k), levels(f),
+  new_levels <- ifelse(!in_smallest2(calcs$count, k, prop), levels(f),
                        other_level)
   if (other_level %in% new_levels) {
     f <- forcats::lvls_revalue(f, new_levels)
@@ -42,11 +45,11 @@ fct_lump_lowfreq2 <- function (
   }
 }
 
-check_natural <- function(k) {
+check_positive <- function(k) {
   if (!is.numeric(k) | k <= 0 | length(k) != 1) {
     stop("`k` must be a positive number")
   }
-  ceiling(k)
+  k
 }
 
 check_calc_levels <- function(f) {
@@ -70,14 +73,14 @@ check_factor <- function(f) {
 # Lump together smallest groups, ensuring that the collective
 # "other" is still smaller than the largest groups. Assumes x
 # is vector of counts in descending order
-lump_cutoff2 <- function(x, k) {
+lump_cutoff2 <- function(x, k, prop) {
   left <- sum(x)
 
   for (i in seq_along(x)) {
     # After group, there are this many left
     left <- left - x[i]
 
-    if (x[k] > left)
+    if (x[k]*prop > left)
       return(i + 1)
   }
 
@@ -86,9 +89,9 @@ lump_cutoff2 <- function(x, k) {
 
 # Given vector of counts, returns logical vector if in
 # smallest groups
-in_smallest2 <- function(x, k) {
+in_smallest2 <- function(x, k, prop) {
   ord_x <- order(x, decreasing = TRUE)
-  idx <- lump_cutoff2(x[ord_x], k)
+  idx <- lump_cutoff2(x[ord_x], k, prop)
 
   to_lump <- seq_along(x) >= idx
   # Undo initial ordering

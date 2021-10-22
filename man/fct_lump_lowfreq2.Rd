@@ -4,7 +4,7 @@
 \alias{fct_lump_lowfreq2}
 \title{Lump together infrequent levels}
 \usage{
-fct_lump_lowfreq2(f, other_level = "Other", k = 1)
+fct_lump_lowfreq2(f, other_level = "Other", k = 1, prop = 1)
 }
 \arguments{
 \item{f}{A factor}
@@ -12,9 +12,9 @@ fct_lump_lowfreq2(f, other_level = "Other", k = 1)
 \item{other_level}{The name to use for the "Other" level.  Defaults to
 \code{"Other"}.}
 
-\item{k}{The function compares to the \code{k}th-largest element (rounds up for
+\item{k, prop}{The function compares to the \code{k}th-largest element (rounds up for
 non-integer positive numbers), and ensures the "Other" level is no larger
-than the \code{k}th-most numerous.  Defaults to \code{1}.}
+than \code{prop} times the \code{k}th-most numerous.  Defaults to \code{1}.}
 }
 \value{
 A reordered factor
@@ -35,5 +35,6 @@ x <- factor(rep(LETTERS[1:9], times = c(40, 10, 5, 27, 1, 1, 1, 1, 1)))
 x \%>\% table()
 x \%>\% fct_lump_lowfreq2() \%>\% table()
 x \%>\% fct_lump_lowfreq2(k = 3, other = "Others") \%>\% table()
+x \%>\% fct_lump_lowfreq2(prop = 1.5) \%>\% table()
 # (Examples modified from forcats)
 }

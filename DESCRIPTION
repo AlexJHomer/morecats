@@ -1,6 +1,6 @@
 Package: morecats
 Title: Provides Additional Functions for Working with Factors
-Version: 0.2
+Version: 0.2.1
 Authors@R: 
     person("Alex", "Homer", , "me@alexjhomer.co.uk", role = c("aut", "cre"))
 Description: This package exists because there are various things I want to do

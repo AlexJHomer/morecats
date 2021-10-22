@@ -4,13 +4,17 @@
 \alias{fct_lump_lowfreq2}
 \title{Lump together infrequent levels}
 \usage{
-fct_lump_lowfreq2(f, other_level = "Other")
+fct_lump_lowfreq2(f, other_level = "Other", k = 1)
 }
 \arguments{
 \item{f}{A factor}
 
 \item{other_level}{The name to use for the "Other" level.  Defaults to
 \code{"Other"}.}
+
+\item{k}{The function compares to the \code{k}th-largest element (rounds up for
+non-integer positive numbers), and ensures the "Other" level is no larger
+than the \code{k}th-most numerous.  Defaults to \code{1}.}
 }
 \value{
 A reordered factor
@@ -19,15 +23,17 @@ A reordered factor
 This function is a variant of \code{fct_lump_infreq} from forcats, but instead of
 lumping together levels such that the "Other" category is smaller than all
 others, it lumps together levels such that the "Other" category is smaller
-than the most frequent level.
+than the \code{k}th-most numerous, for some \code{k}.
 }
 \details{
 As you might imagine, this function borrows heavily from the source code from
 forcats for \code{fct_lump_infreq}, and is used with the appropriate permission.
 }
 \examples{
+# Requires magrittr for pipes
 x <- factor(rep(LETTERS[1:9], times = c(40, 10, 5, 27, 1, 1, 1, 1, 1)))
 x \%>\% table()
-x \%>\% fct_lump_lowfreq() \%>\% table()
-# (Borrowed from forcats.)
+x \%>\% fct_lump_lowfreq2() \%>\% table()
+x \%>\% fct_lump_lowfreq2(k = 3, other = "Others") \%>\% table()
+# (Examples modified from forcats)
 }

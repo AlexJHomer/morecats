@@ -15,7 +15,7 @@
 #' x %>% table()
 #' x %>% fct_lump_lowfreq() %>% table()
 #' # (Borrowed from forcats.)
-fct_lump_infreq2 <- function (f, other_level = "Other") {
+fct_lump_lowfreq2 <- function (f, other_level = "Other") {
   calcs <- check_calc_levels(f)
   f <- calcs$f
   new_levels <- ifelse(!in_smallest2(calcs$count), levels(f),

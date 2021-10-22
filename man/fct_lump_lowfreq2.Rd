@@ -20,14 +20,14 @@ than the \code{k}th-most numerous.  Defaults to \code{1}.}
 A reordered factor
 }
 \description{
-This function is a variant of \code{fct_lump_infreq} from forcats, but instead of
+This function is a variant of \code{fct_lump_lowfreq} from forcats, but instead of
 lumping together levels such that the "Other" category is smaller than all
 others, it lumps together levels such that the "Other" category is smaller
 than the \code{k}th-most numerous, for some \code{k}.
 }
 \details{
 As you might imagine, this function borrows heavily from the source code from
-forcats for \code{fct_lump_infreq}, and is used with the appropriate permission.
+forcats for \code{fct_lump_lowfreq}, and is used with the appropriate permission.
 }
 \examples{
 # Requires magrittr for pipes

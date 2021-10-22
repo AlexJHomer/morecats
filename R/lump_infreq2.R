@@ -9,7 +9,7 @@
 #' @param other_level The name to use for the "Other" level.  Defaults to
 #'   `"Other"`.
 #' @return A reordered factor
-#' @export#
+#' @export
 #' @examples
 #' x <- factor(rep(LETTERS[1:9], times = c(40, 10, 5, 27, 1, 1, 1, 1, 1)))
 #' x %>% table()

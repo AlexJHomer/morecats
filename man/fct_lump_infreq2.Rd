@@ -25,5 +25,5 @@ than the most frequent level
 x <- factor(rep(LETTERS[1:9], times = c(40, 10, 5, 27, 1, 1, 1, 1, 1)))
 x \%>\% table()
 x \%>\% fct_lump_lowfreq() \%>\% table()
-(Borrowed from forcats.)
+# (Borrowed from forcats.)
 }
